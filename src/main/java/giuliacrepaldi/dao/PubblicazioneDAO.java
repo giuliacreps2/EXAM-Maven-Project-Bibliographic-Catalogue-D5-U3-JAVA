@@ -7,7 +7,7 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.TypedQuery;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 public class PubblicazioneDAO {
@@ -53,7 +53,7 @@ public class PubblicazioneDAO {
     }
 
     //4.findby Anno di Pubblicazione
-    public List<Pubblicazione> findByAnnoPubblicazione(Date annoPubblicazione) {
+    public List<Pubblicazione> findByAnnoPubblicazione(LocalDate annoPubblicazione) {
         TypedQuery<Pubblicazione> query = em.createQuery("SELECT a FROM Pubblicazione a WHERE a.annoPubblicazione = :annoPubblicazione ", Pubblicazione.class);
         query.setParameter("annoPubblicazione", annoPubblicazione);
         List<Pubblicazione> listaPubblicazioniAnno = query.getResultList();
@@ -63,7 +63,7 @@ public class PubblicazioneDAO {
 
     //5. findby Autore
     public List<Libro> findByAutore(String autore) {
-        TypedQuery<Libro> query = em.createQuery("SELECT a FROM Pubblicazione a WHERE a.autore LIKE CONCAT ('%',:autore,'%')", Libro.class);
+        TypedQuery<Libro> query = em.createQuery("SELECT a FROM Libro a WHERE a.autore LIKE CONCAT ('%',:autore,'%')", Libro.class);
         query.setParameter("autore", autore);
         List<Libro> listaAutori = query.getResultList();
         System.out.println("Gli autori che potrebbero interessarti sono: " + listaAutori);

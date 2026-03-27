@@ -3,10 +3,7 @@ package giuliacrepaldi;
 import giuliacrepaldi.dao.PrestitoDAO;
 import giuliacrepaldi.dao.PubblicazioneDAO;
 import giuliacrepaldi.dao.UtenteDAO;
-import giuliacrepaldi.entities.Libro;
-import giuliacrepaldi.entities.Prestito;
-import giuliacrepaldi.entities.Rivista;
-import giuliacrepaldi.entities.Utente;
+import giuliacrepaldi.entities.*;
 import giuliacrepaldi.enumeration.Genere;
 import giuliacrepaldi.enumeration.Periodicità;
 import jakarta.persistence.EntityManager;
@@ -14,6 +11,7 @@ import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.UUID;
 
 public class Application {
@@ -32,11 +30,18 @@ public class Application {
         Utente utente = new Utente(UUID.randomUUID(), "Mario", "Rossi", LocalDate.of(1988, 1, 1), 75);
         Prestito prestito = new Prestito(UUID.randomUUID(), LocalDate.of(2026, 03, 02), null);
 
-        pubblicazioneDAO.save(libro);
-        pubblicazioneDAO.save(rivista);
-        utenteDAO.saveUtente(utente);
-        prestitoDAO.savePrestito(prestito);
+//        pubblicazioneDAO.save(libro);
+//        pubblicazioneDAO.save(rivista);
+//        utenteDAO.saveUtente(utente);
+//        prestitoDAO.savePrestito(prestito);
 
+        //Pubblicazione trovata = pubblicazioneDAO.findByIsbn("978-88-8080-123-4");
+
+        //List<Pubblicazione> annoPubblicazione = pubblicazioneDAO.findByAnnoPubblicazione(LocalDate.of(1980, 1, 1));
+
+        //List<Libro> ricercaAutore = pubblicazioneDAO.findByAutore("Eco");
+
+        List<Pubblicazione> ricercaTitolo = pubblicazioneDAO.findPubblicazioneByTitolo("Il nome della");
 
         System.out.println("Hello World!");
         em.close();
