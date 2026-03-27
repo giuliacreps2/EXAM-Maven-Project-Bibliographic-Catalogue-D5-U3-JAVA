@@ -21,4 +21,3 @@ Il Prestito non è una semplice tabella di raccordo tra Utente e Pubblicazione: 
 Le relazioni sono mappate con @ManyToOne sul lato Prestito, senza il lato inverso @OneToMany su Pubblicazione e Utente.
 Motivazione: tutte le operazioni richieste dalla consegna partono dall'entità Prestito (ricerca prestiti scaduti, ricerca per numero tessera). Non è necessario navigare da Pubblicazione o Utente verso i loro prestiti. <img width="962" height="712" alt="ERD for Schema" src="https://github.com/user-attachments/assets/ec874ff6-ed9d-4eb1-b678-f110a80dde99" />
 <img width="990" height="647" alt="DRAWSQL Schema" src="https://github.com/user-attachments/assets/06f54517-cb29-4df1-902f-2b04d8c8da72" />
-<img width="962" height="712" alt="ERD for Schema" src="https://github.com/user-attachments/assets/7a9e7f17-614e-4a60-983a-15a12fc5175e" />
