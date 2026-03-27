@@ -8,6 +8,7 @@ import java.util.UUID;
 @Entity
 @Table(name = "pubblicazioni")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "tipi_di_pubblicazione", discriminatorType = DiscriminatorType.STRING)
 
 public abstract class Pubblicazione {
     @Id

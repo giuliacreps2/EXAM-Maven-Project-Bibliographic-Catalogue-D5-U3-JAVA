@@ -2,16 +2,17 @@ package giuliacrepaldi.entities;
 
 import giuliacrepaldi.enumeration.Genere;
 import jakarta.persistence.Column;
+import jakarta.persistence.DiscriminatorValue;
+import jakarta.persistence.Entity;
 import jakarta.persistence.Enumerated;
-import jakarta.persistence.Id;
 
 import java.util.Date;
 import java.util.UUID;
 
+@Entity
+@DiscriminatorValue("libro")
+
 public class Libro extends Pubblicazione {
-    @Id
-    @Column(name = "id_libro")
-    private UUID idLibro;
 
     @Column(name = "autore")
     private String autore;
@@ -23,17 +24,13 @@ public class Libro extends Pubblicazione {
     public Libro() {
     }
 
-    public Libro(UUID id, String isbn, String titolo, Date annoPubblicazione, int numeroPagine, UUID idLibro, String autore, Genere genere) {
+    public Libro(UUID id, String isbn, String titolo, Date annoPubblicazione, int numeroPagine, String autore, Genere genere) {
         super(id, isbn, titolo, annoPubblicazione, numeroPagine);
-        this.idLibro = idLibro;
         this.autore = autore;
         this.genere = genere;
     }
 
     //Getter & Setter
-    public UUID getIdLibro() {
-        return idLibro;
-    }
 
     public String getAutore() {
         return autore;

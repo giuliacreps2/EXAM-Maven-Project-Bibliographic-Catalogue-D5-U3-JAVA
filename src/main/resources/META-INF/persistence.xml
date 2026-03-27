@@ -5,6 +5,8 @@
 
     <persistence-unit name="BIBLIOGRAPHIC-CATALOGUE">
         <class>giuliacrepaldi.entities.Pubblicazione</class>
+        <class>giuliacrepaldi.entities.Libro</class>
+        <class>giuliacrepaldi.entities.Rivista</class>
         <class>giuliacrepaldi.entities.Prestito</class>
         <class>giuliacrepaldi.entities.Utente</class>
         <properties>

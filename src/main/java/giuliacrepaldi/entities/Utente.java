@@ -1,12 +1,15 @@
 package giuliacrepaldi.entities;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 import java.util.Date;
 import java.util.UUID;
 
 @Entity
-@Table(name = "Utenti")
+@Table(name = "utenti")
 
 public class Utente {
     @Id
@@ -15,11 +18,9 @@ public class Utente {
 
     private String nome;
     private String cognome;
-    private String email;
     @Column(name = "data_di_nascita")
     private Date dataDiNascita;
     @Column(name = "numero_tessera")
-    @GeneratedValue
     private int numeroTessera;
 
     //Costruttore
@@ -27,12 +28,12 @@ public class Utente {
 
     }
 
-    public Utente(UUID id, String nome, String cognome, String email, Date dataDiNascita) {
+    public Utente(UUID id, String nome, String cognome, Date dataDiNascita, int numeroTessera) {
         this.id = id;
         this.nome = nome;
         this.cognome = cognome;
-        this.email = email;
         this.dataDiNascita = dataDiNascita;
+        this.numeroTessera = numeroTessera;
     }
 
     //Getter & Setter
@@ -56,13 +57,6 @@ public class Utente {
         this.cognome = cognome;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
 
     public Date getDataDiNascita() {
         return dataDiNascita;
@@ -70,5 +64,13 @@ public class Utente {
 
     public void setDataDiNascita(Date dataDiNascita) {
         this.dataDiNascita = dataDiNascita;
+    }
+
+    public int getNumeroTessera() {
+        return numeroTessera;
+    }
+
+    public void setNumeroTessera(int numeroTessera) {
+        this.numeroTessera = numeroTessera;
     }
 }

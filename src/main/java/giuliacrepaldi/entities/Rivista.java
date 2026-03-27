@@ -2,15 +2,17 @@ package giuliacrepaldi.entities;
 
 import giuliacrepaldi.enumeration.Periodicità;
 import jakarta.persistence.Column;
-import jakarta.persistence.Id;
+import jakarta.persistence.DiscriminatorValue;
+import jakarta.persistence.Entity;
 
 import java.util.Date;
 import java.util.UUID;
 
+@Entity
+@DiscriminatorValue("rivista")
+
+
 public class Rivista extends Pubblicazione {
-    @Id
-    @Column(name = "id_rivista")
-    private UUID idRivista;
 
     @Column(name = "periodicità")
     private Periodicità periodicità;
@@ -19,16 +21,12 @@ public class Rivista extends Pubblicazione {
     public Rivista() {
     }
 
-    public Rivista(UUID id, String isbn, String titolo, Date annoPubblicazione, int numeroPagine, UUID idLibro, Periodicità periodicità) {
+    public Rivista(UUID id, String isbn, String titolo, Date annoPubblicazione, int numeroPagine, Periodicità periodicità) {
         super(id, isbn, titolo, annoPubblicazione, numeroPagine);
-        this.idRivista = id;
         this.periodicità = periodicità;
     }
 
     //Getter & Setter
-    public UUID getIdRivista() {
-        return idRivista;
-    }
 
     public Periodicità getPeriodicità() {
         return periodicità;
