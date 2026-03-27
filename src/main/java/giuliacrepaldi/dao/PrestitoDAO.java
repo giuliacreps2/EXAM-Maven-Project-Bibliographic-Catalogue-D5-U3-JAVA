@@ -2,6 +2,7 @@ package giuliacrepaldi.dao;
 
 import giuliacrepaldi.entities.Prestito;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.TypedQuery;
 
 import java.util.Date;
@@ -16,6 +17,14 @@ public class PrestitoDAO {
 
     //Metodi
     //Prestiti scaduti e ancora non restituiti
+    //1.save
+    public void savePrestito(Prestito nuovoPrestito) {
+        EntityTransaction transaction = em.getTransaction();
+        transaction.begin();
+        em.persist(nuovoPrestito);
+        transaction.commit();
+        System.out.println("Un nuovo prestito è stato aperto in data: " + nuovoPrestito.getDataInizioPrestito());
+    }
 
     public List<Prestito> findAllPrestitiScaduti() {
         Date oggi = new Date();

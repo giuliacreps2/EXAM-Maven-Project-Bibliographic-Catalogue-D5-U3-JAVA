@@ -2,7 +2,7 @@ package giuliacrepaldi.entities;
 
 import jakarta.persistence.*;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.UUID;
 
 @Entity
@@ -14,11 +14,11 @@ public class Prestito {
     private UUID idPrestito;
 
     @Column(name = "data_inizio_prestito")
-    private Date dataInizioPrestito;
+    private LocalDate dataInizioPrestito;
     @Column(name = "data_restituzione_prevista")
-    private Date dataRestituzionePrevista;
+    private LocalDate dataRestituzionePrevista;
     @Column(name = "data_restituzione_effettiva")
-    private Date dataRestituzioneEffettiva;
+    private LocalDate dataRestituzioneEffettiva;
 
     @ManyToOne
     @JoinColumn(name = "id_pubblicazione")
@@ -32,10 +32,10 @@ public class Prestito {
     public Prestito() {
     }
 
-    public Prestito(UUID idPrestito, Date dataInizioPrestito, Date dataRestituzionePrevista, Date dataRestituzioneEffettiva) {
+    public Prestito(UUID idPrestito, LocalDate dataInizioPrestito, LocalDate dataRestituzioneEffettiva) {
         this.idPrestito = idPrestito;
         this.dataInizioPrestito = dataInizioPrestito;
-        this.dataRestituzionePrevista = dataRestituzionePrevista;
+        this.dataRestituzionePrevista = dataInizioPrestito.plusDays(30);
         this.dataRestituzioneEffettiva = dataRestituzioneEffettiva;
     }
 
@@ -44,27 +44,39 @@ public class Prestito {
         return idPrestito;
     }
 
-    public Date getDataInizioPrestito() {
+    public LocalDate getDataInizioPrestito() {
         return dataInizioPrestito;
     }
 
-    public void setDataInizioPrestito(Date dataInizioPrestito) {
+    public void setDataInizioPrestito(LocalDate dataInizioPrestito) {
         this.dataInizioPrestito = dataInizioPrestito;
     }
 
-    public Date getDataRestituzionePrevista() {
+    public LocalDate getDataRestituzionePrevista() {
         return dataRestituzionePrevista;
     }
 
-    public void setDataRestituzionePrevista(Date dataRestituzionePrevista) {
+    public void setDataRestituzionePrevista(LocalDate dataRestituzionePrevista) {
         this.dataRestituzionePrevista = dataRestituzionePrevista;
     }
 
-    public Date getDataRestituzioneEffettiva() {
+    public LocalDate getDataRestituzioneEffettiva() {
         return dataRestituzioneEffettiva;
     }
 
-    public void setDataRestituzioneEffettiva(Date dataRestituzioneEffettiva) {
+    public void setDataRestituzioneEffettiva(LocalDate dataRestituzioneEffettiva) {
         this.dataRestituzioneEffettiva = dataRestituzioneEffettiva;
+    }
+
+    @Override
+    public String toString() {
+        return "Prestito{" +
+                "idPrestito=" + idPrestito +
+                ", dataInizioPrestito=" + dataInizioPrestito +
+                ", dataRestituzionePrevista=" + dataRestituzionePrevista +
+                ", dataRestituzioneEffettiva=" + dataRestituzioneEffettiva +
+                ", pubblicazione=" + pubblicazione +
+                ", utente=" + utente +
+                '}';
     }
 }

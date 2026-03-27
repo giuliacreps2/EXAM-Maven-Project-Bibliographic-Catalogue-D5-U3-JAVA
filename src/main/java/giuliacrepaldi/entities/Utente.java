@@ -5,7 +5,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.UUID;
 
 @Entity
@@ -19,7 +19,7 @@ public class Utente {
     private String nome;
     private String cognome;
     @Column(name = "data_di_nascita")
-    private Date dataDiNascita;
+    private LocalDate dataDiNascita;
     @Column(name = "numero_tessera")
     private int numeroTessera;
 
@@ -28,7 +28,7 @@ public class Utente {
 
     }
 
-    public Utente(UUID id, String nome, String cognome, Date dataDiNascita, int numeroTessera) {
+    public Utente(UUID id, String nome, String cognome, LocalDate dataDiNascita, int numeroTessera) {
         this.id = id;
         this.nome = nome;
         this.cognome = cognome;
@@ -58,11 +58,11 @@ public class Utente {
     }
 
 
-    public Date getDataDiNascita() {
+    public LocalDate getDataDiNascita() {
         return dataDiNascita;
     }
 
-    public void setDataDiNascita(Date dataDiNascita) {
+    public void setDataDiNascita(LocalDate dataDiNascita) {
         this.dataDiNascita = dataDiNascita;
     }
 
@@ -72,5 +72,16 @@ public class Utente {
 
     public void setNumeroTessera(int numeroTessera) {
         this.numeroTessera = numeroTessera;
+    }
+
+    @Override
+    public String toString() {
+        return "Utente{" +
+                "id=" + id +
+                ", nome='" + nome + '\'' +
+                ", cognome='" + cognome + '\'' +
+                ", dataDiNascita=" + dataDiNascita +
+                ", numeroTessera=" + numeroTessera +
+                '}';
     }
 }

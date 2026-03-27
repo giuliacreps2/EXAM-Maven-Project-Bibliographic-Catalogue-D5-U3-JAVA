@@ -6,7 +6,7 @@ import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Enumerated;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.UUID;
 
 @Entity
@@ -24,7 +24,7 @@ public class Libro extends Pubblicazione {
     public Libro() {
     }
 
-    public Libro(UUID id, String isbn, String titolo, Date annoPubblicazione, int numeroPagine, String autore, Genere genere) {
+    public Libro(UUID id, String isbn, String titolo, LocalDate annoPubblicazione, int numeroPagine, String autore, Genere genere) {
         super(id, isbn, titolo, annoPubblicazione, numeroPagine);
         this.autore = autore;
         this.genere = genere;
@@ -46,5 +46,13 @@ public class Libro extends Pubblicazione {
 
     public void setGenere(Genere genere) {
         this.genere = genere;
+    }
+
+    @Override
+    public String toString() {
+        return "Libro{" +
+                "autore='" + autore + '\'' +
+                ", genere=" + genere +
+                "} " + super.toString();
     }
 }

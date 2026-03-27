@@ -5,7 +5,7 @@ import jakarta.persistence.Column;
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.UUID;
 
 @Entity
@@ -21,7 +21,7 @@ public class Rivista extends Pubblicazione {
     public Rivista() {
     }
 
-    public Rivista(UUID id, String isbn, String titolo, Date annoPubblicazione, int numeroPagine, Periodicità periodicità) {
+    public Rivista(UUID id, String isbn, String titolo, LocalDate annoPubblicazione, int numeroPagine, Periodicità periodicità) {
         super(id, isbn, titolo, annoPubblicazione, numeroPagine);
         this.periodicità = periodicità;
     }
@@ -34,5 +34,12 @@ public class Rivista extends Pubblicazione {
 
     public void setPeriodicità(Periodicità periodicità) {
         this.periodicità = periodicità;
+    }
+
+    @Override
+    public String toString() {
+        return "Rivista{" +
+                "periodicità=" + periodicità +
+                "} " + super.toString();
     }
 }

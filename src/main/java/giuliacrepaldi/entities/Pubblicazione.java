@@ -2,7 +2,7 @@ package giuliacrepaldi.entities;
 
 import jakarta.persistence.*;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.UUID;
 
 @Entity
@@ -20,7 +20,7 @@ public abstract class Pubblicazione {
     @Column(name = "titolo")
     private String titolo;
     @Column(name = "anno_pubblicazione")
-    private Date annoPubblicazione;
+    private LocalDate annoPubblicazione;
     @Column(name = "numero_pagine")
     private int numeroPagine;
 
@@ -28,7 +28,7 @@ public abstract class Pubblicazione {
     public Pubblicazione() {
     }
 
-    Pubblicazione(UUID id, String isbn, String titolo, Date annoPubblicazione, int numeroPagine) {
+    Pubblicazione(UUID id, String isbn, String titolo, LocalDate annoPubblicazione, int numeroPagine) {
         this.id = id;
         this.isbn = isbn;
         this.titolo = titolo;
@@ -57,7 +57,7 @@ public abstract class Pubblicazione {
         this.titolo = titolo;
     }
 
-    public Date getAnnoPubblicazione() {
+    public LocalDate getAnnoPubblicazione() {
         return annoPubblicazione;
     }
 
@@ -67,5 +67,16 @@ public abstract class Pubblicazione {
 
     public void setNumeroPagine(int numeroPagine) {
         this.numeroPagine = numeroPagine;
+    }
+
+    @Override
+    public String toString() {
+        return "Pubblicazione{" +
+                "id=" + id +
+                ", isbn='" + isbn + '\'' +
+                ", titolo='" + titolo + '\'' +
+                ", annoPubblicazione=" + annoPubblicazione +
+                ", numeroPagine=" + numeroPagine +
+                '}';
     }
 }
