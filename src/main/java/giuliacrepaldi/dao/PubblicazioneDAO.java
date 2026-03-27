@@ -1,10 +1,10 @@
 package giuliacrepaldi.dao;
 
+import giuliacrepaldi.entities.Libro;
 import giuliacrepaldi.entities.Pubblicazione;
 import giuliacrepaldi.exceptions.NotFoundException;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
-import jakarta.persistence.Query;
 import jakarta.persistence.TypedQuery;
 
 import java.util.Date;
@@ -32,10 +32,10 @@ public class PubblicazioneDAO {
         if (isbn.isEmpty()) throw new NotFoundException(String.format("L'elemento %s non è stato trovato", isbn));
         EntityTransaction transaction = em.getTransaction();
         transaction.begin();
-        TypedQuery<Pubblicazione> query = em.createQuery("DELETE FROM Pubblicazione a WHERE a.isbn = :isbn ", Pubblicazione.class);
+        TypedQuery<Pubblicazione> query = em.createQuery("SELECT a FROM Pubblicazione a WHERE a.isbn = :isbn ", Pubblicazione.class);
         query.setParameter("isbn", isbn);
         Pubblicazione found = query.getSingleResult();
-        query.executeUpdate();
+        em.remove(found);
         transaction.commit();
         System.out.println("L'elemento " + isbn + "è stato eliminato con successo");
 
@@ -54,7 +54,7 @@ public class PubblicazioneDAO {
 
     //4.findby Anno di Pubblicazione
     public List<Pubblicazione> findByAnnoPubblicazione(Date annoPubblicazione) {
-        Query query = em.createQuery("SELECT a FROM Pubblicazione a WHERE a.annoPubblicazione = :annoPubblicazione ");
+        TypedQuery<Pubblicazione> query = em.createQuery("SELECT a FROM Pubblicazione a WHERE a.annoPubblicazione = :annoPubblicazione ", Pubblicazione.class);
         query.setParameter("annoPubblicazione", annoPubblicazione);
         List<Pubblicazione> listaPubblicazioniAnno = query.getResultList();
         System.out.println("Le pubblicazioni di " + annoPubblicazione + " sono: " + listaPubblicazioniAnno);
@@ -62,17 +62,17 @@ public class PubblicazioneDAO {
     }
 
     //5. findby Autore
-    public List<Pubblicazione> findByAutore(String autore) {
-        TypedQuery<Pubblicazione> query = em.createQuery("SELECT a FROM Pubblicazione a WHERE a.autore LIKE CONCAT ('%',:autore,'%')", Pubblicazione.class);
+    public List<Libro> findByAutore(String autore) {
+        TypedQuery<Libro> query = em.createQuery("SELECT a FROM Pubblicazione a WHERE a.autore LIKE CONCAT ('%',:autore,'%')", Libro.class);
         query.setParameter("autore", autore);
-        List<Pubblicazione> listaAutori = query.getResultList();
+        List<Libro> listaAutori = query.getResultList();
         System.out.println("Gli autori che potrebbero interessarti sono: " + listaAutori);
         return listaAutori;
     }
 
     //5.findby con ilike
     public List<Pubblicazione> findPubblicazioneByTitolo(String titolo) {
-        Query query = em.createQuery("SELECT a FROM Pubblicazione a WHERE a.titolo LIKE CONCAT ('%',:titolo,'%')");
+        TypedQuery<Pubblicazione> query = em.createQuery("SELECT a FROM Pubblicazione a WHERE a.titolo LIKE CONCAT ('%',:titolo,'%')", Pubblicazione.class);
         query.setParameter("titolo", titolo);
         List<Pubblicazione> listaTitoli = query.getResultList();
         System.out.println("I titolo che potrebbero interessarti sono: " + listaTitoli);

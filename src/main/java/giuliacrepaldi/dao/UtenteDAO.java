@@ -8,4 +8,6 @@ public class UtenteDAO {
     public UtenteDAO(EntityManager em) {
         this.em = em;
     }
+
+
 }
